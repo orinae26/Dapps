@@ -4,14 +4,24 @@ pragma solidity ^0.8.0;
 
 contract MyContract {
 
-// types of variables
+// type enum
+enum State {
+  waiting,
+  Ready,
+  Active
+}
+State public state; // states are public, can be accessed by anyone
 
-    string public constant value = "Hello World!";
-    bool public  isTrue = true;
-    int public  number = -42;
-    uint public  number2 = 1337;
-    bytes public  mybytes = "Hello World!";
-    bytes32 public  mybytes32 = "Hello World!";
-    uint256 public  myuint256 = 1337;
-    uint8 public  myuint8 = 13;
+constructor() public {
+  state = State.waiting;// sets default state
+}
+
+function activate() public { // function to activate contract
+  state = State.Active;
+}
+
+function isActive() public view returns (bool) { // function to check if contract is active
+  return state == State.Active;
+}
+
 }
