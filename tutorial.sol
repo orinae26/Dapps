@@ -4,24 +4,24 @@ pragma solidity ^0.8.0;
 
 contract MyContract {
 
-// type enum
-enum State {
-  waiting,
-  Ready,
-  Active
-}
-State public state; // states are public, can be accessed by anyone
+    Person[] public persons; // array of Person
 
-constructor() public {
-  state = State.waiting;// sets default state
-}
+    uint256 public peopleCount; // number of people in the array
 
-function activate() public { // function to activate contract
-  state = State.Active;
-}
 
-function isActive() public view returns (bool) { // function to check if contract is active
-  return state == State.Active;
-}
+    struct Person { // structs allows you to define custom types
+        string _name;
+        uint _age;
+        string _email;
+    }
+
+    function addperson (string memory _name, uint memory _age, string memory _email ) public{// allows us instantiate a person
+        Person memory person = Person(_name, _age, _email); // instantiate a person
+        persons.push(person); // push the person to the array
+        peopleCount++; // increment the people count
+        
+         
+    } 
+    }
 
 }
