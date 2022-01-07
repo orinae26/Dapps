@@ -6,8 +6,20 @@ contract myContract {
   //track user's balance
   mapping(address => uint256) public balances;
 
+  
+
   //address of the wallet
   address payable wallet;
+
+  //event listener
+  event Purchase(
+    address indexed _buyer,
+    uint256 _value,
+    uint256 _balance
+  );
+
+
+  //constructor
   constructor(address payable _wallet){
     wallet = _wallet;
   }
@@ -28,6 +40,9 @@ contract myContract {
 
     //send ether to the wallet: transfer funds from the contract to the wallet
     wallet.transfer(msg.value);
+
+    //emit event
+    emit Purchase (msg.sender, msg.value,balances[msg.sender]);
 
   }
  
